@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd"
+	default-autowire="byType">
+
+
+	<bean id="logger" class="com.caveofprogramming.spring.test.Logger">
+
+	</bean>
+
+	<bean id="consoleWriter"
+		class="com.caveofprogramming.spring.test.ConsoleWriter"
+		primary="true">
+	</bean>
+
+	<bean id="panda" class="com.caveofprogramming.spring.test.ConsoleWriter">
+	</bean>
+
+	<bean id="fileWriter"
+		class="com.caveofprogramming.spring.test.FileWriter">
+	</bean>
+
+	<bean id="squirrel"
+		class="com.caveofprogramming.spring.test.FileWriter"
+		autowire-candidate="false">
+	</bean>
+
+</beans>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<bean id="camera" class="com.caveofprogramming.spring.aop.Camera"></bean>
+	<bean id="logger" class="com.caveofprogramming.spring.aop.Logger"></bean>
+
+
+	<aop:config>
+		<aop:pointcut
+			expression="execution(void com.caveofprogramming.spring.aop.Camera.snap())"
+			id="camerasnap" />
+		<aop:aspect ref="logger" id="loggeraspect">
+			<aop:before method="aboutToTakePhoto"
+				pointcut-ref="camerasnap" />
+		</aop:aspect>
+	</aop:config>
+</beans>

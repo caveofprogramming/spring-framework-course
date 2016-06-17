@@ -1,0 +1,2 @@
+
+You have logged out.

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:webflow-config="http://www.springframework.org/schema/webflow-config"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+
+	<context:component-scan base-package="com.caveofprogramming.spring.web.controllers">
+	</context:component-scan>
+	<mvc:annotation-driven></mvc:annotation-driven>
+
+
+	<mvc:resources location="/resources/" mapping="/static/**" />
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename"
+			value="com.caveofprogramming.spring.web.messages.messages"></property>
+	</bean>
+
+	<bean id="tilesViewResolver"
+		class="org.springframework.web.servlet.view.tiles2.TilesViewResolver">
+	</bean>
+
+
+	<bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles2.TilesConfigurer">
+		<property name="definitions">
+			<list>
+				<value>/WEB-INF/layouts/default.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<webflow-config:flow-registry id="flowRegistry"
+		base-path="/WEB-INF/flows" flow-builder-services="flowBuilderServices">
+		<webflow-config:flow-location path="contact-flow.xml"
+			id="message">
+		</webflow-config:flow-location>
+	</webflow-config:flow-registry>
+
+	<webflow-config:flow-executor id="flowExecutor"
+		flow-registry="flowRegistry">
+	</webflow-config:flow-executor>
+
+
+	<bean id="flowHandlerAdaptor"
+		class="org.springframework.webflow.mvc.servlet.FlowHandlerAdapter">
+		<property name="flowExecutor" ref="flowExecutor"></property>
+	</bean>
+
+
+	<bean id="flowHandlerMapping"
+		class="org.springframework.webflow.mvc.servlet.FlowHandlerMapping">
+		<property name="flowRegistry" ref="flowRegistry"></property>
+		<property name="order" value="0"></property>
+	</bean>
+
+	<webflow-config:flow-builder-services
+		id="flowBuilderServices" view-factory-creator="mvcViewFactoryCreator" validator="validator"/>
+
+	<bean id="mvcViewFactoryCreator"
+		class="org.springframework.webflow.mvc.builder.MvcViewFactoryCreator">
+		<property name="viewResolvers" ref="tilesViewResolver"></property>
+	</bean>
+	
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+	</bean>
+</beans>
