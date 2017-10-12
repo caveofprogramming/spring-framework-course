@@ -3,22 +3,21 @@
   <groupId>com.caveofprogramming.spring.test</groupId>
   <artifactId>spring-hello-world</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  
+
   <dependencies>
-  	<dependency>
+    <dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-core</artifactId>
-  		<version>4.3.10.RELEASE</version>
+  		<version>3.2.3.RELEASE</version>
   	</dependency>
   	<dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-beans</artifactId>
-  		<version>4.3.10.RELEASE</version>
+  		<version>3.2.3.RELEASE</version>
   	</dependency>
   	<dependency>
   		<groupId>org.springframework</groupId>
   		<artifactId>spring-context</artifactId>
-  		<version>4.3.10.RELEASE</version>
+  		<version>3.2.3.RELEASE</version>
   	</dependency>
-  </dependencies>
 </project>
