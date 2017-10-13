@@ -1,28 +1,61 @@
-CREATE DATABASE  IF NOT EXISTS `springtutorial`;
+DROP SCHEMA IF EXISTS `springtutorial` ;
 
-USE `springtutorial`;
+-- -----------------------------------------------------
+-- Schema springtutorial
+-- -----------------------------------------------------
+CREATE SCHEMA IF NOT EXISTS `springtutorial` DEFAULT CHARACTER SET utf8 ;
+USE `springtutorial` ;
+
+-- -----------------------------------------------------
+-- Table `springtutorial`.`users`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `springtutorial`.`users` (
+  `username` VARCHAR(60) NOT NULL,
+  `password` VARCHAR(80) NULL,
+  `authority` VARCHAR(45) NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `enabled` TINYINT(1) NULL DEFAULT 1,
+  `email` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`username`))
+ENGINE = InnoDB;
 
 
-CREATE TABLE `authorities` (
-  `username` varchar(60) NOT NULL,
-  `authority` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+-- -----------------------------------------------------
+-- Table `springtutorial`.`offers`
+-- -----------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `springtutorial`.`offers` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `text` TEXT NOT NULL,
+  `username` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`id`, `username`),
+  INDEX `fk_offers_users_idx` (`username` ASC),
+  CONSTRAINT `fk_offers_users`
+    FOREIGN KEY (`username`)
+    REFERENCES `springtutorial`.`users` (`username`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
-CREATE TABLE `offers` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(100) NOT NULL,
-  `email` varchar(60) NOT NULL,
-  `text` text NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+-- -----------------------------------------------------
+-- Table `springtutorial`.`messages`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `springtutorial`.`messages` ;
 
-
-CREATE TABLE `users` (
-  `username` varchar(60) NOT NULL,
-  `password` varchar(80) DEFAULT NULL,
-  `enabled` tinyint(1) DEFAULT '1',
-  `email` varchar(60) NOT NULL,
-  PRIMARY KEY (`username`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `springtutorial`.`messages` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `subject` VARCHAR(100) NOT NULL,
+  `content` VARCHAR(1000) NOT NULL,
+  `name` VARCHAR(100) NOT NULL,
+  `email` VARCHAR(60) NOT NULL,
+  `username` VARCHAR(60) NOT NULL,
+  PRIMARY KEY (`id`),
+  INDEX `fk_messages_users1_idx` (`username` ASC),
+  CONSTRAINT `fk_messages_users1`
+    FOREIGN KEY (`username`)
+    REFERENCES `springtutorial`.`users` (`username`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
