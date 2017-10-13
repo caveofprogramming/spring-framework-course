@@ -1,0 +1,9 @@
+The following needs to go between the <Context> tags in your Tomcat context.xml.
+
+Change the username, password and url to match the name of the database you've set up in MySQL.
+
+ <Resource name="jdbc/spring" auth="Container" type="javax.sql.DataSource"
+               maxActive="100" maxIdle="30" maxWait="10000"
+               username="root" password="hello" driverClassName="com.mysql.jdbc.Driver"
+               url="jdbc:mysql://localhost:3306/springtutorial"/>
+
