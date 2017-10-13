@@ -1,5 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.caveofprogramming.spring</groupId>
 	<artifactId>spring-tutorial</artifactId>
@@ -12,8 +11,12 @@
 	<!-- Use of it is entirely optional. -->
 	<!-- ====================================================================== -->
 
+	<!-- Parent poms have to have packaging set to pom -->
 	<packaging>pom</packaging>
 
+	<!-- These properties avoid having to type version numbers over and
+	 over again, and make them easy to change. Later on we can refer to
+   them as, for example ${spring.version}-->
 	<properties>
 		<spring.version>4.3.10.RELEASE</spring.version>
 		<spring-security.version>4.2.3.RELEASE</spring-security.version>
@@ -31,6 +34,32 @@
 		<junit.version>4.11</junit.version>
 	</properties>
 
+	<!-- This ensures that if you import a Maven project into Eclipse that
+	 uses this parent pom, the Java version gets set to 1.8 -->
+
+	<build>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.apache.maven.plugins</groupId>
+					<artifactId>maven-compiler-plugin</artifactId>
+					<version>3.7.0</version>
+					<configuration>
+						<source>1.8</source>
+						<target>1.8</target>
+					</configuration>
+				</plugin>
+			</plugins>
+		</pluginManagement>
+	</build>
+
+	<modules>
+		<module>ModuleOne</module>
+	</modules>
+
+	<!-- This provides suggested or default version numbers for any of the
+	listed dependencies that you might add. It doesn't itself actually add
+	the dependencies. -->
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
