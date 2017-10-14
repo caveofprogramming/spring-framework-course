@@ -3,7 +3,7 @@
 	xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	id="WebApp_ID" version="2.5">
-	<display-name>spring-tutorial-50</display-name>
+	<display-name>exception-handling-in-spring-mvc</display-name>
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 		<welcome-file>index.htm</welcome-file>
@@ -14,7 +14,7 @@
 	</welcome-file-list>
 	<servlet>
 		<description></description>
-		<display-name>offers</display-name>
+		<display-name>exception-handling-in-spring-mvc</display-name>
 		<servlet-name>offers</servlet-name>
 		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
@@ -35,7 +35,7 @@
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
@@ -43,7 +43,5 @@
 		classpath:com/caveofprogramming/spring/web/config/service-context.xml
 		</param-value>
 	</context-param>
-	
+
 </web-app>
-
-
